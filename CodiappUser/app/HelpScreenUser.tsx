@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Panne from "../components/Panne";
 import Perdu from "../components/Perdu";
 import { Colors } from "../constants/Colors";
 
@@ -27,6 +28,7 @@ export default function HelpScreenUser() {
             <View style={styles.content}>
                 <Perdu />
                 <NoTransport />
+                <Panne />
             </View>
         </SafeAreaView>
     );

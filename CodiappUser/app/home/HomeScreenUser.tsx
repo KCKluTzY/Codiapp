@@ -15,7 +15,7 @@ export default function HomeScreenUser() {
                 <Text style={styles.title}>Codi App</Text>
                 <StatusCard />
                 <EmergencyButton />
-                {<DailyRoad />}
+                <DailyRoad />
             </ScrollView>
         </SafeAreaView>
     );
