@@ -1,20 +1,21 @@
-import { MaterialIcons } from "@expo/vector-icons";
+
 import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../constants/Colors";
+import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 
-export default function Panne() {
+export default function Autre() {
     return (
-        <View style={styles.PanneCard}>
+        <View style={styles.AutreCard} >
             <MaterialIcons name="warning-amber" size={40} color={Colors.danger} />
-            <View style={styles.PanneTextContainer}>
-                <Text style={styles.PanneText}>Le tram/bus est en panne</Text>
+            <View style={styles.AutreTextContainer}>
+                <Text style={styles.AutreText}>Autre chose</Text>
             </View>
         </View>
 
     )
 }
 const styles = StyleSheet.create({
-    PanneCard: {
+    AutreCard: {
         backgroundColor: Colors.button_background,
         borderRadius: 24,
         padding: 15,
@@ -24,10 +25,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 10,
     },
-    PanneTextContainer: {
+    AutreTextContainer: {
         flex: 1,
     },
-    PanneText: {
+    AutreText: {
         color: "#000000",
         fontSize: 18,
         fontWeight: "500",

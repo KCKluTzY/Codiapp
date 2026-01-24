@@ -1,12 +1,12 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { StyleSheet, Text, View, Image } from "react-native";
 
 export default function NoTransport() {
     return (
         <View style={styles.noTransportCard}>
-            <MaterialIcons name="departure-board" size={40} color="blue" />
+            <Image source={require("../assets/images/noTransport.png")} style={styles.logo} />
             <View style={styles.noTransportTextContainer}>
-                <Text style={styles.noTransportText}>Mon Transport n'est pas arrivé</Text>
+                <Text style={styles.noTransportText}>Mon transport n'est pas arrivé</Text>
             </View>
         </View>
 
@@ -14,10 +14,10 @@ export default function NoTransport() {
 }
 const styles = StyleSheet.create({
     noTransportCard: {
-        backgroundColor: "#4da9ffa4",
+        backgroundColor: Colors.button_background,
         borderRadius: 24,
         padding: 15,
-        borderColor: "#4da9ffa4",
+        borderColor: Colors.button_border,
         borderWidth: 5,
         flexDirection: "row",
         alignItems: "center",
@@ -31,5 +31,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "500",
         marginRight: 10,
-    }
+    },
+    logo: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
+    },
 });

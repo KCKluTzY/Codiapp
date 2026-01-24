@@ -6,6 +6,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Panne from "../components/Panne";
 import Perdu from "../components/Perdu";
 import { Colors } from "../constants/Colors";
+import ChangerTransport from "@/components/ChangerTransport";
+import Blesse from "@/components/Blesse";
+import Derange from "@/components/Derange";
+import Autre from "@/components/Autre";
 
 export default function HelpScreenUser() {
     const router = useRouter();
@@ -29,6 +33,10 @@ export default function HelpScreenUser() {
                 <Perdu />
                 <NoTransport />
                 <Panne />
+                <ChangerTransport />
+                <Blesse />
+                <Derange />
+                <Autre />
             </View>
         </SafeAreaView>
     );

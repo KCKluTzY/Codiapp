@@ -1,20 +1,19 @@
-import { Colors } from "@/constants/Colors";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { Colors } from "../constants/Colors";
 
-export default function Perdu() {
+export default function Derange() {
     return (
-
-        <View style={styles.perduCard}>
-            <Image source={require("../assets/images/perdu.png")} style={styles.logo} />
-            <View style={styles.perduTextContainer}>
-                <Text style={styles.perduText}>Je suis perdu(e)</Text>
+        <View style={styles.DerangeCard} >
+            <Image source={require("../assets/images/derange.png")} style={styles.logo} />
+            <View style={styles.DerangeTextContainer}>
+                <Text style={styles.DerangeText}>Quelqu'un me dérange</Text>
             </View>
         </View>
 
     )
 }
 const styles = StyleSheet.create({
-    perduCard: {
+    DerangeCard: {
         backgroundColor: Colors.button_background,
         borderRadius: 24,
         padding: 15,
@@ -24,18 +23,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 10,
     },
-    logo: {
-        width: 40,
-        height: 40,
-        marginRight: 10,
-    },
-    perduTextContainer: {
+    DerangeTextContainer: {
         flex: 1,
     },
-    perduText: {
+    DerangeText: {
         color: "#000000",
         fontSize: 18,
         fontWeight: "500",
+        marginRight: 10,
+    },
+    logo: {
+        width: 40,
+        height: 40,
         marginRight: 10,
     }
 });

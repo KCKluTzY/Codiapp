@@ -4,5 +4,7 @@ export const Colors = {
     danger: "#f00505",
     background: "#F8FAFC",
     text: "#0F172A",
+    button_background: "#ff714d4c",
+    button_border: "#ff714df1",
 
 };

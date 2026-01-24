@@ -2,19 +2,19 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../constants/Colors";
 
-export default function Panne() {
+export default function ChangerTransport() {
     return (
-        <View style={styles.PanneCard}>
+        <View style={styles.ChangerTransportCard} >
             <MaterialIcons name="warning-amber" size={40} color={Colors.danger} />
-            <View style={styles.PanneTextContainer}>
-                <Text style={styles.PanneText}>Le tram/bus est en panne</Text>
+            <View style={styles.ChangerTransportTextContainer}>
+                <Text style={styles.ChangerTransportText}>Je dois changer de transport</Text>
             </View>
         </View>
 
     )
 }
 const styles = StyleSheet.create({
-    PanneCard: {
+    ChangerTransportCard: {
         backgroundColor: Colors.button_background,
         borderRadius: 24,
         padding: 15,
@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 10,
     },
-    PanneTextContainer: {
+    ChangerTransportTextContainer: {
         flex: 1,
     },
-    PanneText: {
+    ChangerTransportText: {
         color: "#000000",
         fontSize: 18,
         fontWeight: "500",
