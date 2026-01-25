@@ -1,16 +1,20 @@
 
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
+import { useRouter } from "expo-router";
 
 export default function Autre() {
+    const router = useRouter();
     return (
-        <View style={styles.AutreCard} >
-            <MaterialIcons name="warning-amber" size={40} color={Colors.danger} />
-            <View style={styles.AutreTextContainer}>
-                <Text style={styles.AutreText}>Autre chose</Text>
+        <Pressable onPress={() => router.push("/ChatScreen")}>
+            <View style={styles.AutreCard} >
+                <Image source={require("../assets/images/Autre.png")} style={styles.logo} />
+                <View style={styles.AutreTextContainer}>
+                    <Text style={styles.AutreText}>Autre chose</Text>
+                </View>
             </View>
-        </View>
+        </Pressable>
 
     )
 }
@@ -24,6 +28,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 10,
+    },
+    logo: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
     },
     AutreTextContainer: {
         flex: 1,

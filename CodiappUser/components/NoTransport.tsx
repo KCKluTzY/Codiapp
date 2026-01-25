@@ -1,15 +1,17 @@
 import { Colors } from "@/constants/Colors";
-import { StyleSheet, Text, View, Image } from "react-native";
-
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 export default function NoTransport() {
+    const router = useRouter();
     return (
-        <View style={styles.noTransportCard}>
-            <Image source={require("../assets/images/noTransport.png")} style={styles.logo} />
-            <View style={styles.noTransportTextContainer}>
-                <Text style={styles.noTransportText}>Mon transport n'est pas arrivé</Text>
+        <Pressable onPress={() => router.push("/ChatScreen")}>
+            <View style={styles.noTransportCard}>
+                <Image source={require("../assets/images/noTransport.png")} style={styles.logo} />
+                <View style={styles.noTransportTextContainer}>
+                    <Text style={styles.noTransportText}>Mon transport n'est pas arrivé</Text>
+                </View>
             </View>
-        </View>
-
+        </Pressable>
     )
 }
 const styles = StyleSheet.create({

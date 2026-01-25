@@ -1,15 +1,18 @@
+import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 
 export default function Perdu() {
+    const router = useRouter();
     return (
-
-        <View style={styles.perduCard}>
-            <Image source={require("../assets/images/perdu.png")} style={styles.logo} />
-            <View style={styles.perduTextContainer}>
-                <Text style={styles.perduText}>Je suis perdu(e)</Text>
+        <Pressable onPress={() => router.push("/ChatScreen")}>
+            <View style={styles.perduCard}>
+                <Image source={require("../assets/images/perdu.png")} style={styles.logo} />
+                <View style={styles.perduTextContainer}>
+                    <Text style={styles.perduText}>Je suis perdu(e)</Text>
+                </View>
             </View>
-        </View>
+        </Pressable>
 
     )
 }

@@ -1,16 +1,19 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
+import { useRouter } from "expo-router";
 
 export default function ChangerTransport() {
+    const router = useRouter();
     return (
-        <View style={styles.ChangerTransportCard} >
-            <MaterialIcons name="warning-amber" size={40} color={Colors.danger} />
-            <View style={styles.ChangerTransportTextContainer}>
-                <Text style={styles.ChangerTransportText}>Je dois changer de transport</Text>
+        <Pressable onPress={() => router.push("/ChatScreen")}>
+            <View style={styles.ChangerTransportCard} >
+                <Image source={require("../assets/images/ChangerTransport.png")} style={styles.logo} />
+                <View style={styles.ChangerTransportTextContainer}>
+                    <Text style={styles.ChangerTransportText}>Je dois changer de transport</Text>
+                </View>
             </View>
-        </View>
-
+        </Pressable>
     )
 }
 const styles = StyleSheet.create({
@@ -23,6 +26,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 10,
+    },
+    logo: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
     },
     ChangerTransportTextContainer: {
         flex: 1,
