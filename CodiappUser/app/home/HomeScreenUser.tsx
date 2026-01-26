@@ -1,15 +1,19 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DailyRoad from "../../components/DailyRoad";
 import EmergencyButton from "../../components/EmergencyButton";
 import StatusCard from "../../components/StatusCard";
 import { Colors } from "../../constants/Colors";
-import ChangerTransport from "@/components/ChangerTransport";
+import { useRouter } from "expo-router";
 
 export default function HomeScreenUser() {
+    const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={styles.container}>
+                <Pressable onPress={() => router.push("/Parametres")}>
+                    <Image source={require("../../assets/images/parametre.png")} style={styles.parametre} />
+                </Pressable>
                 <View style={styles.logoContainer}>
                     <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
                 </View>
@@ -42,5 +46,14 @@ const styles = StyleSheet.create({
     logoContainer: {
         alignItems: "center",
         marginBottom: 0.2,
+    },
+    parametre: {
+        width: 40,
+        height: 40,
+        marginLeft: 300,
+        position: "absolute",
+        top: 16,
+        right: 16,
+        zIndex: 10,
     },
 })

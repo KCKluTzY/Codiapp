@@ -1,7 +1,6 @@
 
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
-import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { useRouter } from "expo-router";
 
 export default function Autre() {
