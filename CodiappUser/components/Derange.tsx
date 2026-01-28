@@ -1,14 +1,18 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
+import { useRouter } from "expo-router"
 
 export default function Derange() {
+    const router = useRouter();
     return (
-        <View style={styles.DerangeCard} >
-            <Image source={require("../assets/images/derange.png")} style={styles.logo} />
-            <View style={styles.DerangeTextContainer}>
-                <Text style={styles.DerangeText}>Quelqu'un me dérange</Text>
+        <Pressable onPress={() => router.push("/AppelAidant")}>
+            <View style={styles.DerangeCard} >
+                <Image source={require("../assets/images/derange.png")} style={styles.logo} />
+                <View style={styles.DerangeTextContainer}>
+                    <Text style={styles.DerangeText}>Quelqu'un me dérange</Text>
+                </View>
             </View>
-        </View>
+        </Pressable>
 
     )
 }

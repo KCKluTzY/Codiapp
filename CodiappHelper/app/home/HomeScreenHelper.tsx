@@ -4,8 +4,10 @@ import { Colors } from "../../constants/Colors";
 import HeaderProfile from "../../components/HeaderProfil";
 import Filtres from "../../components/Filtres";
 import Footer from "../../components/Footer";
+import { useRouter } from "expo-router";
 
 export default function HomeScreenHelper() {
+    const router = useRouter();
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

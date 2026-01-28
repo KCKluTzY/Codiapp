@@ -2,8 +2,10 @@ import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import StatsRow from "./StatsRow";
+import { useRouter } from "expo-router";
 
 export default function HeaderProfile() {
+    const router = useRouter();
     return (
         <View style={styles.container}>
             <View style={styles.left}>
@@ -17,7 +19,7 @@ export default function HeaderProfile() {
                 </View>
             </View>
 
-            <Pressable style={styles.settingsButton}>
+            <Pressable style={styles.settingsButton} onPress={() => router.push("/Parametres")}>
                 <MaterialIcons name="settings" size={28} color="white" />
             </Pressable>
             <StatsRow />

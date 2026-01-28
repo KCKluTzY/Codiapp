@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
-
+import { useRouter } from "expo-router"
 export default function Blesse() {
+    const router = useRouter();
     return (
-        <View style={styles.BlesseCard} >
-            <Image source={require("../assets/images/blesse.png")} style={styles.logo} />
-            <View style={styles.BlesseTextContainer}>
-                <Text style={styles.BlesseText}>Je suis blessé(e)</Text>
+        <Pressable onPress={() => router.push("/AppelUrgence")}>
+            <View style={styles.BlesseCard} >
+                <Image source={require("../assets/images/blesse.png")} style={styles.logo} />
+                <View style={styles.BlesseTextContainer}>
+                    <Text style={styles.BlesseText}>Je suis blessé(e)</Text>
+                </View>
             </View>
-        </View>
+        </Pressable>
 
     )
 }
