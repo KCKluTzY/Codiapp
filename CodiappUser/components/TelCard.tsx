@@ -1,15 +1,19 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 interface TelCardProps {
     icon: keyof typeof Ionicons.glyphMap;
 }
 
 export default function TelCard({ icon }: TelCardProps) {
+    const router = useRouter();
     return (
-        <View style={styles.card}>
-            <Ionicons name={icon} size={28} color="white" />
-        </View>
+        <Pressable onPress={() => router.push("/AppelAidant")} style={styles.card}>
+            <View style={styles.card}>
+                <Ionicons name={icon} size={28} color="white" />
+            </View>
+        </Pressable>
     );
 }
 

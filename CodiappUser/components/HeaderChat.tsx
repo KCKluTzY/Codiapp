@@ -12,13 +12,10 @@ export default function HeaderChat() {
                 <Pressable onPress={() => router.push("/HelpScreenUser")} hitSlop={12}>
                     <Ionicons name="arrow-back" size={28} color="white" />
                 </Pressable>
-
                 <Text style={styles.demandeText}>Aide en cours</Text>
-
                 <View style={{ width: 28 }} />
             </View>
             <StatsRow />
-
         </View>
     );
 }

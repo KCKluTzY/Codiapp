@@ -1,12 +1,13 @@
 import { View, TextInput, Pressable, StyleSheet } from "react-native";
 import { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export default function ChatFooter() {
     const [message, setMessage] = useState("");
 
     const canSend = message.trim().length > 0;
-
+    const router = useRouter();
     return (
         <View style={styles.container}>
             <Pressable style={styles.iconBtn}>

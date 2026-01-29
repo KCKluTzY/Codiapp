@@ -1,15 +1,19 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 interface CameraCardProps {
     icon: keyof typeof Ionicons.glyphMap;
 }
 
 export default function CameraCard({ icon }: CameraCardProps) {
+    const router = useRouter();
     return (
-        <View style={styles.card}>
-            <Ionicons name={icon} size={28} color="white" />
-        </View>
+        <Pressable onPress={() => router.push("/CameraInterface")} style={styles.card}>
+            <View>
+                <Ionicons name={icon} size={28} color="white" />
+            </View>
+        </Pressable>
     );
 }
 
