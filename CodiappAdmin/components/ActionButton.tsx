@@ -1,17 +1,20 @@
-import { Pressable, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 export default function ActionButton({
     icon,
     label,
     danger,
+    onPress,
 }: {
     icon: keyof typeof Ionicons.glyphMap;
     label: string;
     danger?: boolean;
+    onPress?: () => void;
 }) {
     return (
         <Pressable
+            onPress={onPress}
             style={[
                 styles.button,
                 danger && { backgroundColor: "#ffe5e5" },
@@ -30,6 +33,7 @@ export default function ActionButton({
             >
                 {label}
             </Text>
+
         </Pressable>
     );
 }

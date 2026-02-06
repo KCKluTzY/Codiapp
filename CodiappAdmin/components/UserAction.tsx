@@ -1,15 +1,17 @@
-import { View, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { StyleSheet, View } from "react-native";
 import ActionButton from "./ActionButton";
 
 export default function UserActions({ userId }: { userId?: string }) {
+    const router = useRouter()
+
     return (
         <View style={styles.container}>
             <ActionButton icon="person-add" label="Attribuer un tuteur" />
-            <ActionButton icon="map" label="Voir sur la carte" />
+            <ActionButton icon="map" label="Voir sur la carte" onPress={() => router.push("/MapInterface")} />
             <ActionButton
                 icon="ban"
                 label="Suspendre l’utilisateur"
-                danger
             />
         </View>
     );

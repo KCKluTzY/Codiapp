@@ -1,8 +1,11 @@
-import { View, Text, StyleSheet, Switch } from "react-native";
 import Slider from "@react-native-community/slider";
+import { useState } from "react";
+import { StyleSheet, Switch, Text, View } from "react-native";
 
 
 export default function HelperSettingsCard() {
+    const [distance, setDistance] = useState(10);
+
     return (
         <View style={styles.container}>
             <Text style={styles.sectionTitle}>Paramètres</Text>
@@ -19,10 +22,11 @@ export default function HelperSettingsCard() {
                 <Slider
                     minimumValue={1}
                     maximumValue={30}
-                    value={10}
+                    value={distance}
+                    onValueChange={(val) => setDistance(val)}
                     step={1}
                 />
-                <Text style={styles.distance}>10 km</Text>
+                <Text style={styles.distance}>{distance} km</Text>
             </View>
         </View>
     );

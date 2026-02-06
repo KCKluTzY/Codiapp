@@ -1,80 +1,125 @@
-import { ScrollView, View, Text, StyleSheet, Pressable } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import AdminStatCard from "@/components/AdminStatCard";
-import AdminAlertItem from "@/components/AdminAlertItem";
+import { Colors } from "@/constants/Colors";
 import { useRouter } from "expo-router";
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function AdminDashboard() {
+export default function Authentification() {
     const router = useRouter();
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView contentContainerStyle={styles.container}>
-                <Text style={styles.title}>Dashboard Admin</Text>
+        <SafeAreaView style={styles.safe}>
+            <View style={styles.header}>
+                <Text style={styles.title}>Authentification</Text>
+            </View>
 
-                {/* Stats */}
-                <View style={styles.statsRow}>
-                    <AdminStatCard icon="people" label="Aidés actifs" value="128" />
-                    <AdminStatCard icon="medkit" label="Aidants actifs" value="42" />
+            <View style={styles.content}>
+                <View style={styles.card}>
+                    <Image
+                        source={require("@/assets/images/authentification.png")}
+                        style={styles.logo}
+                    />
+                    <View style={styles.textContainer}>
+                        <Text style={styles.cardTitle}>Connexion</Text>
+                        <Text style={styles.cardSubTitle}>
+                            Entrez vos identifiants
+                        </Text>
+                    </View>
                 </View>
 
-                <View style={styles.statsRow}>
-                    <AdminStatCard icon="alert" label="Aides ce mois" value="96" />
-                    <AdminStatCard icon="warning" label="Sans tuteur" value="7" />
-                </View>
+                <TextInput
+                    placeholder="Email"
+                    placeholderTextColor={styles.cardSubTitle.color}
+                    keyboardType="email-address"
+                    style={styles.input}
+                />
 
-                {/* Alertes */}
-                <Text style={styles.section}>Alertes</Text>
-                <AdminAlertItem text="7 aidés sans tuteur assigné" />
-                <AdminAlertItem text="3 aidants inactifs depuis 30 jours" />
+                <TextInput
+                    placeholder="Mot de passe"
+                    placeholderTextColor={styles.cardSubTitle.color}
+                    secureTextEntry
+                    style={styles.input}
+                />
 
-                {/* Navigation */}
-                <Text style={styles.section}>Gestion</Text>
-
-                <Pressable
-                    style={styles.link}
-                    onPress={() => router.push("/(admin)/users")}
-
-                >
-                    <Text>👵 Gérer les aidés</Text>
+                <Pressable style={styles.button} onPress={() => router.push("/Dashboard")}>
+                    <Text style={styles.cardTitle}>Se connecter</Text>
                 </Pressable>
-
-                <Pressable
-                    style={styles.link}
-                    onPress={() => router.push("/(admin)/helpers")}
-
-                >
-                    <Text>🧑‍⚕️ Gérer les aidants</Text>
-                </Pressable>
-            </ScrollView>
+            </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 16,
+    safe: {
+        flex: 1,
+        backgroundColor: Colors.background,
+    },
+    header: {
+        paddingHorizontal: 16,
+        paddingTop: 8,
+        paddingBottom: 12,
+        backgroundColor: Colors.primary,
     },
     title: {
-        fontSize: 24,
+        marginTop: 18,
+        fontSize: 26,
         fontWeight: "800",
-        marginBottom: 16,
+        textAlign: "center",
+        color: "#fff",
     },
-    statsRow: {
+    content: {
+        flex: 1,
+        padding: 24,
+    },
+    card: {
+        backgroundColor: Colors.primary,
+        borderRadius: 24,
+        padding: 15,
+        borderColor: Colors.primary_light,
+        borderWidth: 5,
         flexDirection: "row",
-        gap: 12,
-        marginBottom: 12,
+        alignItems: "center",
+        marginBottom: 32,
     },
-    section: {
-        fontSize: 16,
-        fontWeight: "700",
-        marginTop: 24,
-        marginBottom: 8,
+    logo: {
+        width: 60,
+        height: 60,
+        marginRight: 12,
     },
-    link: {
+    textContainer: {
+        flex: 1,
+    },
+    cardTitle: {
+        fontSize: 18,
+        fontWeight: "600",
+        color: "#000",
+    },
+    cardSubTitle: {
+        fontSize: 14,
+        color: "#333",
+        marginTop: 2,
+    },
+    input: {
         backgroundColor: "#fff",
-        padding: 14,
-        borderRadius: 12,
-        marginBottom: 8,
+        borderRadius: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 14,
+        fontSize: 16,
+        marginBottom: 16,
+        borderColor: Colors.primary_light,
+        borderWidth: 2,
+    },
+    button: {
+        backgroundColor: Colors.primary,
+        borderRadius: 20,
+        paddingVertical: 14,
+        alignItems: "center",
+        borderColor: Colors.primary_light,
+        borderWidth: 3,
+        marginTop: 8,
+    },
+    buttonText: {
+        fontSize: 18,
+        fontWeight: "700",
+        color: "#fff",
     },
 });
