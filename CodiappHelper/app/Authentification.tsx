@@ -1,19 +1,19 @@
+import Ionicons from "@expo/vector-icons/build/Ionicons";
+import { useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
+import { useEffect, useState } from "react";
 import {
-    StyleSheet,
-    Text,
-    View,
+    ActivityIndicator,
+    Alert,
     Image,
     Pressable,
+    StyleSheet,
+    Text,
     TextInput,
-    Alert,
-    ActivityIndicator,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "../constants/Colors";
-import { useRouter } from "expo-router";
-import Ionicons from "@expo/vector-icons/build/Ionicons";
-import { useState, useEffect } from "react";
-import * as SecureStore from "expo-secure-store";
 
 export default function Authentification() {
     const router = useRouter();
@@ -32,7 +32,7 @@ export default function Authentification() {
         checkUser();
     }, []);
 
-    // 🔹 Formatage username backend → affichage
+    // Formatage username backend → affichage
     const formatUsername = (raw: string) => {
         return raw
             .replace(/_/g, " ")

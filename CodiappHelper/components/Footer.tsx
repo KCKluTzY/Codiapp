@@ -1,17 +1,24 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons"; // tu peux choisir une autre librairie
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
-type FilterType = "demandes" | "Groupe" | "Aides en cours";
+// 1. On définit les types pour que HomeScreen et Footer se comprennent
+export type FilterType = "Demandes" | "Groupe" | "Aides en cours";
+
+interface FooterProps {
+    onTabChange?: (tab: "demandes" | "aides") => void; // Prop pour changer la liste sur HomeScreen
+}
 
 const filters: { key: FilterType; label: string; icon: string }[] = [
-    { key: "demandes", label: "Demandes", icon: "error-outline" },
+    { key: "Demandes", label: "Demandes", icon: "error-outline" },
     { key: "Groupe", label: "Groupe", icon: "group" },
     { key: "Aides en cours", label: "Aides en cours", icon: "diversity-1" },
 ];
 
-export default function Footer() {
-    const [active, setActive] = useState<FilterType>("demandes");
+export default function Footer({ onTabChange }: FooterProps) {
+    const [active, setActive] = useState<FilterType>("Demandes");
+    const router = useRouter();
 
     return (
         <View style={styles.container}>
@@ -21,13 +28,26 @@ export default function Footer() {
                     <Pressable
                         key={filter.key}
                         style={styles.tab}
-                        onPress={() => setActive(filter.key)}
+                        onPress={() => {
+                            setActive(filter.key);
+
+                            // LOGIQUE DE NAVIGATION / CHANGEMENT
+                            if (filter.key === "Groupe") {
+                                router.push("/ChatScreen");
+                            } else if (filter.key === "Demandes") {
+                                // On dit au HomeScreen d'afficher les demandes
+                                if (onTabChange) onTabChange("demandes");
+                            } else if (filter.key === "Aides en cours") {
+                                // On dit au HomeScreen d'afficher les aides acceptées
+                                if (onTabChange) onTabChange("aides");
+                            }
+                        }}
                     >
                         <MaterialIcons
                             name={filter.icon as any}
                             size={35}
                             color={isActive ? "#9f44ef" : "#555"}
-                            style={{ marginBottom: 4, }}
+                            style={{ marginBottom: 4 }}
                         />
                         <Text style={[styles.text, isActive && styles.activeText]}>
                             {filter.label}
@@ -42,25 +62,22 @@ export default function Footer() {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        justifyContent: "space-around", // espace égal entre les boutons
+        justifyContent: "space-around",
         paddingHorizontal: 16,
         paddingVertical: 12,
         borderTopWidth: 1,
         borderTopColor: "#e3e3e3",
+        backgroundColor: "#fff", // Important pour que le footer ne soit pas transparent
     },
-
     tab: {
         alignItems: "center",
-        padding: 8,
-        marginLeft: 10,
+        flex: 1, // On utilise flex 1 pour que les boutons soient bien répartis
     },
-
     text: {
         fontSize: 14,
         fontWeight: "600",
         color: "#555",
     },
-
     activeText: {
         color: "#9f44ef",
     },

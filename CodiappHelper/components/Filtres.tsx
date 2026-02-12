@@ -1,27 +1,55 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useRouter } from "expo-router";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type FilterType = "urgent" | "all" | "map";
 
-export default function Filtres() {
-    const [active, setActive] = useState<FilterType>("urgent");
+interface FiltresProps {
+    active: FilterType;
+    setActive: (filter: FilterType) => void;
+    urgentCount: number;
+}
+
+export default function Filtres({ active, setActive, urgentCount }: FiltresProps) {
+    const router = useRouter();
 
     return (
         <View style={styles.container}>
-            <Pressable style={[styles.tab, active === "urgent" && styles.activeUrgent,]} onPress={() => setActive("urgent")}>
-                <Text style={[styles.text, active === "urgent" && styles.activeText,]}>Urgent (0)</Text>
+            {/* Bouton Toutes */}
+            <Pressable
+                style={[styles.tab, active === "all" && styles.activeAll]}
+                onPress={() => setActive("all")}
+            >
+                <Text style={[styles.text, active === "all" && styles.activeText]}>
+                    Toutes
+                </Text>
             </Pressable>
 
-            <Pressable style={[styles.tab, active === "all" && styles.active]} onPress={() => setActive("all")}>
-                <Text style={[styles.text, active === "all" && styles.activeText]}>Toutes</Text>
+            {/* Bouton Urgent */}
+            <Pressable
+                style={[styles.tab, active === "urgent" && styles.activeUrgent]}
+                onPress={() => setActive("urgent")}
+            >
+                <Text style={[styles.text, active === "urgent" && styles.activeText]}>
+                    Urgent ({urgentCount})
+                </Text>
             </Pressable>
 
-            <Pressable style={[styles.tab, active === "map" && styles.active]} onPress={() => setActive("map")}>
-                <Text style={[styles.text, active === "map" && styles.activeText]}>Afficher Carte</Text>
+            {/* Bouton Carte */}
+            <Pressable
+                style={[styles.tab, active === "map" && styles.active]}
+                onPress={() => {
+                    setActive("map");
+                    router.push("/MapInterface");
+                }}
+            >
+                <Text style={[styles.text, active === "map" && styles.activeTextMap]}>
+                    Afficher carte
+                </Text>
             </Pressable>
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
@@ -29,7 +57,6 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginBottom: 16,
     },
-
     tab: {
         paddingVertical: 10,
         paddingHorizontal: 16,
@@ -37,22 +64,24 @@ const styles = StyleSheet.create({
         backgroundColor: "#e3e3e3cd",
         marginRight: 10,
     },
-
     text: {
         fontSize: 16,
         fontWeight: "600",
         color: "#555",
     },
-
-    active: {
-        backgroundColor: "#EDE9FE",
+    activeAll: {
+        backgroundColor: "#9f44ef", // Violet pour "Toutes"
     },
-
     activeUrgent: {
-        backgroundColor: "#EF4444",
+        backgroundColor: "#EF4444", // Rouge pour "Urgent"
     },
-
+    active: {
+        backgroundColor: "#EDE9FE", // Couleur soft pour la carte
+    },
     activeText: {
         color: "white",
     },
+    activeTextMap: {
+        color: "#9f44ef",
+    }
 });
