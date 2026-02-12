@@ -15,24 +15,23 @@ import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useState, useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
 
-export default function Authentification() {
+export default function AuthentificationUser() {
     const router = useRouter();
     const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // Vérifie si déjà connecté
+    // 🔹 Redirige si déjà connecté
     useEffect(() => {
         const checkUser = async () => {
             const storedUser = await SecureStore.getItemAsync("user");
             if (storedUser) {
-                router.replace("/home/HomeScreenHelper");
+                router.replace("/home/HomeScreenUser");
             }
         };
         checkUser();
     }, []);
 
-    // 🔹 Formatage username backend → affichage
     const formatUsername = (raw: string) => {
         return raw
             .replace(/_/g, " ")
@@ -59,9 +58,7 @@ export default function Authentification() {
             );
 
             const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.message || "Erreur de connexion");
-            }
+            if (!response.ok) throw new Error(data.message || "Erreur de connexion");
 
             const formattedUsername = formatUsername(data.username);
 
@@ -73,14 +70,10 @@ export default function Authentification() {
                 refreshToken: data.refreshToken,
             };
 
-            await SecureStore.setItemAsync(
-                "user",
-                JSON.stringify(userToStore)
-            );
+            await SecureStore.setItemAsync("user", JSON.stringify(userToStore));
 
             Alert.alert("Succès", "Connexion réussie ✅");
-            router.replace("/home/HomeScreenHelper");
-
+            router.replace("/home/HomeScreenUser");
         } catch (err: any) {
             Alert.alert("Erreur", err.message);
         } finally {
@@ -105,9 +98,7 @@ export default function Authentification() {
                     />
                     <View style={styles.textContainer}>
                         <Text style={styles.cardTitle}>Connexion</Text>
-                        <Text style={styles.cardSubTitle}>
-                            Entrez vos identifiants
-                        </Text>
+                        <Text style={styles.cardSubTitle}>Entrez vos identifiants</Text>
                     </View>
                 </View>
 
@@ -130,13 +121,7 @@ export default function Authentification() {
                 />
 
                 <Pressable style={styles.button} onPress={handleLogin}>
-                    {loading ? (
-                        <ActivityIndicator color="#fff" />
-                    ) : (
-                        <Text style={styles.buttonText}>
-                            Se connecter
-                        </Text>
-                    )}
+                    {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Se connecter</Text>}
                 </Pressable>
             </View>
         </SafeAreaView>
@@ -144,88 +129,16 @@ export default function Authentification() {
 }
 
 const styles = StyleSheet.create({
-    safe: {
-        flex: 1,
-        backgroundColor: Colors.background,
-    },
-
-    header: {
-        paddingHorizontal: 16,
-        paddingTop: 8,
-        paddingBottom: 12,
-        backgroundColor: Colors.primary,
-    },
-
-    title: {
-        marginTop: 18,
-        fontSize: 26,
-        fontWeight: "800",
-        textAlign: "center",
-        color: "#fff",
-    },
-
-    content: {
-        flex: 1,
-        padding: 24,
-    },
-
-    card: {
-        backgroundColor: Colors.primary,
-        borderRadius: 24,
-        padding: 15,
-        borderColor: Colors.primary_light,
-        borderWidth: 5,
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: 32,
-    },
-
-    logo: {
-        width: 60,
-        height: 60,
-        marginRight: 12,
-    },
-
-    textContainer: {
-        flex: 1,
-    },
-
-    cardTitle: {
-        fontSize: 18,
-        fontWeight: "600",
-        color: "#000",
-    },
-
-    cardSubTitle: {
-        fontSize: 14,
-        color: "#333",
-        marginTop: 2,
-    },
-
-    input: {
-        backgroundColor: "#fff",
-        borderRadius: 16,
-        paddingHorizontal: 16,
-        paddingVertical: 14,
-        fontSize: 16,
-        marginBottom: 16,
-        borderColor: Colors.primary_light,
-        borderWidth: 2,
-    },
-
-    button: {
-        backgroundColor: Colors.primary,
-        borderRadius: 20,
-        paddingVertical: 14,
-        alignItems: "center",
-        borderColor: Colors.primary_light,
-        borderWidth: 3,
-        marginTop: 8,
-    },
-
-    buttonText: {
-        fontSize: 18,
-        fontWeight: "700",
-        color: "#fff",
-    },
+    safe: { flex: 1, backgroundColor: Colors.background },
+    header: { paddingHorizontal: 16, paddingTop: 8, paddingBottom: 12, backgroundColor: Colors.primary },
+    title: { marginTop: 18, fontSize: 26, fontWeight: "800", textAlign: "center", color: "#fff" },
+    content: { flex: 1, padding: 24 },
+    card: { backgroundColor: Colors.primary, borderRadius: 24, padding: 15, borderColor: Colors.primary_light, borderWidth: 5, flexDirection: "row", alignItems: "center", marginBottom: 32 },
+    logo: { width: 60, height: 60, marginRight: 12 },
+    textContainer: { flex: 1 },
+    cardTitle: { fontSize: 18, fontWeight: "600", color: "#000" },
+    cardSubTitle: { fontSize: 14, color: "#333", marginTop: 2 },
+    input: { backgroundColor: "#fff", borderRadius: 16, paddingHorizontal: 16, paddingVertical: 14, fontSize: 16, marginBottom: 16, borderColor: Colors.primary_light, borderWidth: 2 },
+    button: { backgroundColor: Colors.primary, borderRadius: 20, paddingVertical: 14, alignItems: "center", borderColor: Colors.primary_light, borderWidth: 3, marginTop: 8 },
+    buttonText: { fontSize: 18, fontWeight: "700", color: "#fff" },
 });

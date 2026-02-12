@@ -17,63 +17,87 @@ export default function HeaderProfile() {
     const router = useRouter();
     const [user, setUser] = useState<AuthUser | null>(null);
 
-    // 🔹 Formater le pseudo "marie_dupont" → "Marie Dupont"
+    // 🔹 Formatage username backend
     const formatUsername = (raw: string) => {
         return raw
-            .split("_")
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
+            .replace(/_/g, " ")
+            .toLowerCase()
+            .replace(/\b\w/g, l => l.toUpperCase());
     };
 
-    // 🔹 Charger le user depuis SecureStore à chaque focus
+    //  Charger user à chaque focus
     useFocusEffect(
         useCallback(() => {
             const loadUser = async () => {
-                const storedUserRaw = await SecureStore.getItemAsync("user");
+                const storedUserRaw =
+                    await SecureStore.getItemAsync("user");
+
                 if (storedUserRaw) {
                     const storedUser = JSON.parse(storedUserRaw);
-                    storedUser.username = formatUsername(storedUser.username);
+
+                    storedUser.username =
+                        formatUsername(storedUser.username);
+
                     setUser(storedUser);
                 }
             };
+
             loadUser();
         }, [])
     );
 
-    // 🔹 Déconnexion
+    //  Logout
     const handleLogout = async () => {
         await SecureStore.deleteItemAsync("user");
         Alert.alert("Déconnexion", "Vous avez été déconnecté.");
-        router.replace("/Authentification"); // redirige vers login
+        router.replace("/Authentification");
     };
 
     const initial = user?.username?.charAt(0).toUpperCase() ?? "?";
-    const roleLabel = user?.role === "HELPER" ? "Aidant(e)" : "Aidé";
+    const roleLabel =
+        user?.role === "HELPER" ? "Aidant(e)" : "Aidé";
 
     return (
         <View style={styles.container}>
             <View style={styles.left}>
                 <View style={styles.avatar}>
-                    <Text style={styles.avatarText}>{initial}</Text>
+                    <Text style={styles.avatarText}>
+                        {initial}
+                    </Text>
                 </View>
 
                 <View>
-                    <Text style={styles.name}>{user?.username ?? "Utilisateur"}</Text>
-                    <Text style={styles.role}>{roleLabel}</Text>
+                    <Text style={styles.name}>
+                        {user?.username ?? "Utilisateur"}
+                    </Text>
+                    <Text style={styles.role}>
+                        {roleLabel}
+                    </Text>
                 </View>
             </View>
 
-            {/* 🔹 Boutons Paramètres + Déconnexion */}
+            {/* Paramètres + Logout */}
             <View style={styles.rightButtons}>
                 <Pressable
                     style={styles.iconButton}
                     onPress={() => router.push("/Parametres")}
                 >
-                    <MaterialIcons name="settings" size={28} color="white" />
+                    <MaterialIcons
+                        name="settings"
+                        size={28}
+                        color="white"
+                    />
                 </Pressable>
 
-                <Pressable style={styles.iconButton} onPress={handleLogout}>
-                    <MaterialIcons name="logout" size={28} color="white" />
+                <Pressable
+                    style={styles.iconButton}
+                    onPress={handleLogout}
+                >
+                    <MaterialIcons
+                        name="logout"
+                        size={28}
+                        color="white"
+                    />
                 </Pressable>
             </View>
 
@@ -91,10 +115,12 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
     },
+
     left: {
         flexDirection: "row",
         alignItems: "center",
     },
+
     avatar: {
         width: 48,
         height: 48,
@@ -104,28 +130,33 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginRight: 12,
     },
+
     avatarText: {
         color: "#9B4DFF",
         fontSize: 20,
         fontWeight: "700",
     },
+
     name: {
         color: "white",
         fontSize: 16,
         fontWeight: "700",
     },
+
     role: {
         color: "white",
         fontSize: 13,
         fontWeight: "700",
     },
+
     rightButtons: {
         position: "absolute",
         top: 48,
         right: 20,
         flexDirection: "row",
     },
+
     iconButton: {
-        marginLeft: 12, // espace entre les boutons
+        marginLeft: 12,
     },
 });
