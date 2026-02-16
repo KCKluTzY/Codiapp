@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      host: mongo
+      port: ${MONGO_PORT}
+      username: ${MONGO_USER}
+      password: ${MONGO_PASSWORD}
+      database: alerts_db
+      authentication-database: admin

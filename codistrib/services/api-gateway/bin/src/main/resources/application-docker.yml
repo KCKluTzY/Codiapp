@@ -1,0 +1,35 @@
+spring:
+  # Redis - Connexion via nom de conteneur
+  data:
+    redis:
+      host: redis
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+
+# Logging (moins verbeux en Docker)
+logging:
+  level:
+    root: INFO
+    com.codistrib.gateway: INFO
+    org.springframework.cloud.gateway: WARN
+
+grpc:
+  client:
+    auth-service:
+      host: auth-service
+      port: ${AUTH_SERVICE_PORT}
+    user-service:
+      host: user-service
+      port: ${USER_SERVICE_PORT}
+    messaging-service:
+      host: messaging-service
+      port: ${MESSAGING_SERVICE_PORT}
+    location-service:
+      host: location-service
+      port: ${LOCATION_SERVICE_PORT}
+    alert-service:
+      host: alert-service
+      port: ${ALERT_SERVICE_PORT}
+    notification-service:
+      host: notification-service
+      port: ${NOTIFICATION_SERVICE_PORT}

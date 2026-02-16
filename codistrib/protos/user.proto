@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package com.codistrib.proto.user;
+
+option java_multiple_files = true;
+option java_package = "com.codistrib.proto.user";
+option java_outer_classname = "UserProto";
+
+// Service gRPC pour User Service
+service UserService {
+  // Créer un utilisateur (appelé par Auth Service lors de l'inscription)
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  
+  // Récupérer un utilisateur par son ID
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  
+  // Récupérer un utilisateur par son authId
+  rpc GetUserByAuthId(GetUserByAuthIdRequest) returns (GetUserResponse);
+  
+  // Mettre à jour l'authId d'un utilisateur (quand credentials créés)
+  rpc UpdateAuthId(UpdateAuthIdRequest) returns (UpdateAuthIdResponse);
+  
+  // Valider un utilisateur (vérifier qu'il existe et est actif)
+  rpc ValidateUser(ValidateUserRequest) returns (ValidateUserResponse);
+  
+  // Récupérer un snapshot utilisateur (pour Messaging Service)
+  rpc GetUserSnapshot(GetUserSnapshotRequest) returns (UserSnapshotResponse);
+  
+  // Vérifier si un utilisateur existe
+  rpc CheckUserExists(CheckUserExistsRequest) returns (CheckUserExistsResponse);
+}
+
+// ============================================================================
+// Messages de requête
+// ============================================================================
+
+message CreateUserRequest {
+  string auth_id = 1;           // UUID depuis Auth Service
+  string name = 2;              // Nom complet
+  string phone_number = 3;      // Téléphone (optionnel)
+  string birth_date = 4;        // Date de naissance (format ISO)
+  string created_by = 5;        // UUID du créateur (optionnel)
+}
+
+message GetUserRequest {
+  string user_id = 1;           // UUID de l'utilisateur
+}
+
+message GetUserByAuthIdRequest {
+  string auth_id = 1;           // UUID depuis Auth Service
+}
+
+message UpdateAuthIdRequest {
+  string user_id = 1;           // UUID de l'utilisateur
+  string auth_id = 2;           // Nouveau authId
+}
+
+message ValidateUserRequest {
+  string user_id = 1;           // UUID de l'utilisateur
+}
+
+message GetUserSnapshotRequest {
+  string user_id = 1;           // UUID de l'utilisateur
+}
+
+message CheckUserExistsRequest {
+  string user_id = 1;           // UUID de l'utilisateur
+}
+
+// ============================================================================
+// Messages de réponse
+// ============================================================================
+
+message CreateUserResponse {
+  string user_id = 1;           // UUID de l'utilisateur créé
+  string auth_id = 2;           // UUID Auth Service
+  string name = 3;              // Nom
+  string status = 4;            // Statut (ACTIVE, PENDING_CREDENTIALS, etc.)
+  bool success = 5;             // Succès de l'opération
+  string message = 6;           // Message de résultat
+}
+
+message GetUserResponse {
+  string user_id = 1;           // UUID de l'utilisateur
+  string auth_id = 2;           // UUID Auth Service
+  string name = 3;              // Nom
+  string phone_number = 4;      // Téléphone
+  string status = 5;            // Statut
+  bool success = 6;             // Succès
+}
+
+message UpdateAuthIdResponse {
+  string user_id = 1;           // UUID de l'utilisateur
+  string auth_id = 2;           // Nouveau authId
+  string status = 3;            // Nouveau statut
+  bool success = 4;             // Succès
+  string message = 5;           // Message
+}
+
+message ValidateUserResponse {
+  bool valid = 1;               // true si utilisateur existe et actif
+  string user_id = 2;           // UUID de l'utilisateur
+  string name = 3;              // Nom (si trouvé)
+  string status = 4;            // Statut (si trouvé)
+  string message = 5;           // Message de validation
+}
+
+message UserSnapshotResponse {
+  string user_id = 1;           // UUID de l'utilisateur
+  string name = 2;              // Nom
+  string profile_picture_url = 3; // URL photo de profil
+  string role = 4;              // Rôle (PERSONNE_DI, HELPER, ADMIN)
+  bool success = 5;             // Succès
+}
+
+message CheckUserExistsResponse {
+  string user_id = 1;           // UUID de l'utilisateur
+  bool exists = 2;              // true si existe
+}

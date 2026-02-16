@@ -1,0 +1,32 @@
+# Maven
+target/
+*.jar
+*.war
+.m2/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+*.env.local
+!.env.example
+
+# Generated
+**/generated-sources/
+**/src/main/java/com/codistrib/*/proto/
+
+# OS
+.DS_Store
+Thumbs.db

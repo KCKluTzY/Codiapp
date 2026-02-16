@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package com.codistrib.proto.auth;
+
+option java_package = "com.codistrib.proto.auth";
+option java_multiple_files = true;
+option java_outer_classname = "AuthProto";
+
+// Rôles supportés
+enum UserRole {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_PERSON_DI = 1;
+  ROLE_HELPER = 2;
+  ROLE_ADMINISTRATOR = 3;
+}
+
+// Requêtes
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  UserRole role = 4;
+}
+
+message LoginRequest {
+  string identifier = 1;  // email ou username
+  string password = 2;
+}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message ValidateTokenRequest {
+  string access_token = 1;
+}
+
+message LogoutRequest {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+// Response
+message LogoutResponse {
+  bool success = 1;
+}
+
+message TokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+  int64  expires_in = 4;
+  string user_id = 5;
+  UserRole role = 6;
+  string username = 7;        // AJOUT
+  string email = 8;           // AJOUT
+}
+
+message TokenClaims {
+  bool is_valid = 1;
+  string user_id = 2;
+  string username = 3;
+  string email = 4;
+  UserRole role = 5;
+}
+
+// Service expose gRPC
+service AuthService {
+  rpc Register(RegisterRequest) returns (TokenResponse);
+  rpc Login(LoginRequest) returns (TokenResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (TokenResponse);
+  rpc ValidateToken(ValidateTokenRequest) returns (TokenClaims);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+}

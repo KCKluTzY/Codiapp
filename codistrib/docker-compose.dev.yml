@@ -1,0 +1,226 @@
+networks:
+  codistrib-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  
+  mongo_data:
+    driver: local
+  
+  redis_data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:16-alpine
+
+    container_name: codistrib-postgres
+    
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: postgres
+    
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+      # Script d'initialisation pour créer les bases de données
+      # :ro = read-only (le conteneur ne peut pas modifier ce fichier)
+      - ./infrastructure/postgres/init-multiple-databases.sh:/docker-entrypoint-initdb.d/init-db.sh:ro
+
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    
+    networks:
+      - codistrib-network
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    
+    container_name: codistrib-mongo
+    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    
+    volumes:
+      - mongo_data:/data/db
+      
+      # Script d'initialisation pour créer les bases de données mongodb
+      # - ./infrastructure/mongo/init-multiple-databases.js:/docker-entrypoint-initdb.d/init-db.js:ro
+
+    ports:
+      - "${MONGO_PORT}:27017"
+    
+    networks:
+      - codistrib-network
+    
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    
+    container_name: codistrib-redis
+
+    command: >
+      redis-server
+      --appendonly yes
+      --requirepass ${REDIS_PASSWORD}
+    
+    volumes:
+      - redis_data:/data
+    
+    ports:
+      - "${REDIS_PORT}:6379"
+    
+    networks:
+      - codistrib-network
+    
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+    restart: unless-stopped
+  
+  api-gateway:
+    build:
+      context: .
+      dockerfile: services/api-gateway/Dockerfile
+    container_name: codistrib-api-gateway
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+
+      JWT_SECRET: ${JWT_SECRET}
+
+      RATE_LIMIT_ENABLED: "true"
+
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    ports:
+      - "${API_GATEWAY_PORT:-8080}:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+    networks:
+      - codistrib-network
+    restart: unless-stopped
+  
+  auth-service:
+    build:
+      context: .
+      dockerfile: services/auth-service/Dockerfile
+    container_name: codistrib-auth-service
+    environment:
+      # Profil Spring Boot
+      SPRING_PROFILES_ACTIVE: docker
+      
+      # Configuration base de données
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_AUTH_SERVICE_DB: ${POSTGRES_AUTH_SERVICE_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      
+      # Configuration Redis
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      
+      # Configuration JWT
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ACCESS_TOKEN_EXPIRATION: 3600000    # 15 minutes
+      JWT_REFRESH_TOKEN_EXPIRATION: 2592000000  # 24 heures
+      
+      # Configuration gRPC
+      AUTH_SERVICE_PORT: ${AUTH_SERVICE_PORT}
+    ports:
+      - "${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}"
+    networks:
+      - codistrib-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "${AUTH_SERVICE_PORT}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+  
+  user-service:
+    build:
+      context: .
+      dockerfile: services/user-service/Dockerfile
+    container_name: codistrib-user-service
+    environment:
+      # Profil Spring Boot
+      SPRING_PROFILES_ACTIVE: docker
+      
+      # Configuration base de données
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER_SERVICE_DB: ${POSTGRES_USER_SERVICE_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      
+      # Configuration Redis
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      
+      # Configuration JWT
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_ACCESS_TOKEN_EXPIRATION: 3600000    # 15 minutes
+      JWT_REFRESH_TOKEN_EXPIRATION: 2592000000  # 24 heures
+      
+      # Configuration gRPC
+      USER_SERVICE_PORT: ${USER_SERVICE_PORT}
+      AUTH_SERVICE_PORT: ${AUTH_SERVICE_PORT}
+    ports:
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
+    networks:
+      - codistrib-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "${USER_SERVICE_PORT}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s

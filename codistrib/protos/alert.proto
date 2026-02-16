@@ -1,0 +1,53 @@
+syntax = "proto3";
+package com.codistrib.proto.alert;
+option java_package = "com.codistrib.proto.alert";
+option java_outer_classname = "AlertProto";
+
+message Alert {
+  string id = 1;
+  string personId = 2;
+  string helperId = 3; // Vide si non assigné
+  string type = 4;
+  string message = 5;
+  double lat = 6;
+  double lon = 7;
+  string status = 8; // OPEN, ASSIGNED, RESOLVED, CANCELED
+  string createdAt = 9; // ISO-8601
+  string updatedAt = 10; // ISO-8601
+  string resolvedAt = 11; // ISO-8601
+}
+
+message CreateAlertRequest {
+  string personId = 1;
+  string type = 2;
+  string message = 3;
+  double lat = 4;
+  double lon = 5;
+}
+message CreateAlertResponse { Alert alert = 1; }
+
+message AssignAlertRequest { string alertId = 1; string helperId = 2; }
+message AssignAlertResponse { Alert alert = 1; }
+
+message ResolveAlertRequest { string alertId = 1; string helperId = 2; }
+message ResolveAlertResponse { Alert alert = 1; }
+
+message GetAlertRequest { string alertId = 1; }
+message GetAlertResponse { Alert alert = 1; }
+
+message ListByPersonRequest { string personId = 1; }
+message ListByHelperRequest { string helperId = 1; }
+message ListByStatusRequest { string status = 1; } // OPEN | ASSIGNED | RESOLVED | CANCELED
+
+message ListAlertsResponse { repeated Alert alerts = 1; }
+
+service AlertService {
+  rpc CreateAlert(CreateAlertRequest) returns (CreateAlertResponse);
+  rpc AssignAlert(AssignAlertRequest) returns (AssignAlertResponse);
+  rpc ResolveAlert(ResolveAlertRequest) returns (ResolveAlertResponse);
+
+  rpc GetAlert(GetAlertRequest) returns (GetAlertResponse);
+  rpc ListAlertsByPerson(ListByPersonRequest) returns (ListAlertsResponse);
+  rpc ListAlertsByHelper(ListByHelperRequest) returns (ListAlertsResponse);
+  rpc ListAlertsByStatus(ListByStatusRequest) returns (ListAlertsResponse);
+}

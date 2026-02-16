@@ -1,0 +1,53 @@
+# Server Configuration
+server:
+  port: ${USER_SERVICE_PORT}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# gRPC Server Configuration
+grpc:
+  server:
+    port: ${USER_SERVICE_PORT}
+  client:
+    auth-service:
+      host: localhost
+      port: ${AUTH_SERVICE_PORT}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_USER_SERVICE_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  # JPA/Hibernate Configuration
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update  # Hibernate gère la création/mise à jour des tables
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        # Génération automatique des tables
+        hbm2ddl:
+          auto: update
+
+# Actuator (Health checks)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# Logging
+logging:
+  level:
+    root: INFO
+    com.codistrib.userservice: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    io.grpc: DEBUG
