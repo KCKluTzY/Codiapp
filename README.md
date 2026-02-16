@@ -29,7 +29,8 @@ npm install -g expo-cli
 ## Clonage du projet
 Pour pouvoir lancer notre projet il vous suffira de le cloner via la commande suivante dans le terminal:
 git clone https://github.com/KCKluTzY/Codiapp.git 
-puis placez vous dans le dossier CODIAPP via : cd Codiapp
+puis placez vous dans le dossier CODIAPP via : 
+cd Codiapp
 
 ## Installation des dépendances
 Après le clonage il vous faudra installer les dépendances pour cela vous devrez lancer la commande: 
@@ -37,12 +38,14 @@ npm install
 
 ## Lancement du projet 
 Une fois le projet clonné et les dépendance installer on peux maintenant passer au lancement du projet pour cela lancez votre émulateur android studio puis cliquer sur more action selectionnez Virtual Devices Manager et créer un nouvel appareil grace au petit + en haut a gauche , choisissez le model Pixel 7 et nommé le comme vous le souhaitez. Ensuite lancez l'appareil un ecran de téléphone apparaitra. 
-Une fois cela fait dirigez vous dans un Powershell et placez vous dans le chemin du projet jusqu'a arriver sur quelque chose comme \Codiapp puis selon l'application que vous souhaitez lancer faites 
+Une fois cela fait dirigez vous dans un Powershell et placez vous dans le chemin du projet jusqu'a arriver sur quelque chose comme \Codiapp puis selon l'application que vous souhaitez lancer faites: 
 cd CodiAppUser (pour l'application Aidé) 
 cd CodiAppHelper (pour l'application Aidant)
 cd CodiAppAdmin (pour l'application Admin)
 
-Puis lancez Expo avec la commande:  npx expo start 
+Puis lancez Expo avec la commande: 
+npx expo start
+
 un QR code apparaitra vous pouvez le scanner avec votre Smartphone via l'application Expo go ou alors appuyer sur a qui lancera l'application sur votre émulateur Android Studio
 
 Vous pourrez alors acceder aux différentes fonctionnalité de l'application et l'utiliser comme bon vous semble.
