@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function MapInterface() {
+    // Hook de navigation pour revenir en arrière avec `router.back()`
     const router = useRouter();
 
     return (
@@ -10,24 +11,26 @@ export default function MapInterface() {
 
             {/* CARTE */}
             <View style={styles.mapProvider}>
+                {/* Placeholder visuel en attendant l'intégration d'une vraie carte (MapView, etc.) */}
                 <View style={styles.placeholderMap}>
                     <Ionicons name="map-outline" size={60} color="#ccc" />
                     <Text style={{ color: '#aaa', marginTop: 10 }}>Carte en attente d'API</Text>
                 </View>
             </View>
 
-            {/* INTERFACE */}
+            {/* INTERFACE superposée contenir l'api map */}
             <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
 
-                {/* Header */}
+                {/* Header contenant le bouton 'back' */}
                 <View style={styles.header}>
                     <Pressable onPress={() => router.back()} style={styles.backBtn}>
                         <Ionicons name="chevron-back" size={32} color="white" />
                     </Pressable>
                 </View>
 
-                {/* Menu */}
+                {/* Menu latéral flottant */}
                 <View style={styles.sideMenu}>
+                    {/* Bouton d'action de la localisation */}
                     <Pressable style={[styles.actionBtn, { backgroundColor: '#3B82F6' }]}>
                         <Ionicons name="locate" size={28} color="white" />
                     </Pressable>
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     mapProvider: {
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFillObject, // remplit tout l'espace parent 
     },
     placeholderMap: {
         flex: 1,

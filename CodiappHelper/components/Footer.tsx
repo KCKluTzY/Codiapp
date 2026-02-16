@@ -22,6 +22,7 @@ export default function Footer({ onTabChange }: FooterProps) {
 
     return (
         <View style={styles.container}>
+            {/* Footer bas : navigation rapide entre vues (peut déclencher navigation ou callback) */}
             {filters.map((filter) => {
                 const isActive = active === filter.key;
                 return (

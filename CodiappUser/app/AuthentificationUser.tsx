@@ -21,7 +21,7 @@ export default function AuthentificationUser() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    // 🔹 Redirige si déjà connecté
+    // 🔹 Redirige si déjà connecté (stockage sécurisé via SecureStore)
     useEffect(() => {
         const checkUser = async () => {
             const storedUser = await SecureStore.getItemAsync("user");
@@ -32,6 +32,7 @@ export default function AuthentificationUser() {
         checkUser();
     }, []);
 
+    // Normalise le username renvoyé par le backend pour affichage
     const formatUsername = (raw: string) => {
         return raw
             .replace(/_/g, " ")
@@ -39,6 +40,7 @@ export default function AuthentificationUser() {
             .replace(/\b\w/g, l => l.toUpperCase());
     };
 
+    // Envoi des identifiants au backend et stockage sécurisé des tokens
     const handleLogin = async () => {
         if (!identifier || !password) {
             Alert.alert("Erreur", "Veuillez remplir tous les champs");

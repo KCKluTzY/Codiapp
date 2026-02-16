@@ -9,6 +9,7 @@ interface LocationCardProps {
 export default function LocationCard({ icon }: LocationCardProps) {
     const router = useRouter();
     return (
+        // Carte d'action vers la carte (MapInterface)
         <Pressable onPress={() => router.push("/MapInterface")} style={styles.card}>
             <View>
                 <Ionicons name={icon} size={28} color="white" />

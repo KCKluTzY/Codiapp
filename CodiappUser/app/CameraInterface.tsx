@@ -12,7 +12,7 @@ export default function CameraInterface() {
                 style={styles.fullScreen}
                 resizeMode="cover"
             >
-                {/* BARRE SUPÉRIEURE */}
+                {/* Vue caméra : image d'exemple + contrôles flottants */}
                 <View style={styles.header}>
                     <Pressable onPress={() => router.back()} style={styles.backBtn}>
                         <Ionicons name="chevron-back" size={32} color="white" />
@@ -22,7 +22,7 @@ export default function CameraInterface() {
                     </View>
                 </View>
 
-                {/* MENU DE DROITE */}
+                {/* Menu d'actions à droite (dessin, switch caméra, chat) */}
                 <View style={styles.sideMenu}>
                     {/* Bouton Dessiner (Stylo) */}
                     <Pressable style={[styles.actionBtn, { backgroundColor: '#3B82F6' }]}>
@@ -43,7 +43,7 @@ export default function CameraInterface() {
                     </Pressable>
                 </View>
 
-                {/* BOUTON QUITTER (BAS) */}
+                {/* Footer : action principale (terminer l'aide) */}
                 <View style={styles.footer}>
                     <Pressable
                         onPress={() => router.push('/ChatScreen')}

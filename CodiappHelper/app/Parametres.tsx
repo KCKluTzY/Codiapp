@@ -65,9 +65,6 @@ const DAYS = [
 export default function Parametres() {
     const router = useRouter();
 
-    /* -------------------- */
-    /* States               */
-    /* -------------------- */
 
     const [shareLocation, setShareLocation] = useState(false);
     const [emergencyNotifications, setEmergencyNotifications] =
@@ -84,10 +81,9 @@ export default function Parametres() {
     const [selectedDays, setSelectedDays] = useState<string[]>([]);
     const [fontFamily, setFontFamily] = useState("System");
 
-    /* -------------------- */
-    /* Toggle jour          */
-    /* -------------------- */
 
+
+    // Toggle d'un jour dans la sélection de jours disponibles
     const toggleDay = (day: string) => {
         setSelectedDays((prev) =>
             prev.includes(day)
@@ -96,9 +92,7 @@ export default function Parametres() {
         );
     };
 
-    /* -------------------- */
-    /* UI                   */
-    /* -------------------- */
+   
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

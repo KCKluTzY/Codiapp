@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 export default function NoTransport() {
     const router = useRouter();
     return (
+        // Option 'Transport manquant' : ouvre le chat pour signaler un retard
         <Pressable onPress={() => router.push("/ChatScreen")}>
             <View style={styles.noTransportCard}>
                 <Image source={require("../assets/images/noTransport.png")} style={styles.logo} />

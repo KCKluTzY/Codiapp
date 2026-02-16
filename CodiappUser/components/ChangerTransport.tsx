@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 export default function ChangerTransport() {
     const router = useRouter();
     return (
+        // Option pour signaler un changement de transport (ouvre discussion)
         <Pressable onPress={() => router.push("/ChatScreen")}>
             <View style={styles.ChangerTransportCard} >
                 <Image source={require("../assets/images/ChangerTransport.png")} style={styles.logo} />

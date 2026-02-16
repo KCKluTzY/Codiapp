@@ -16,7 +16,7 @@ export default function AdminHelperCard({ helper }: AdminHelperCardProps) {
             style={styles.card}
             onPress={() => router.push(`/(admin)/helpers/${helper.id}`)}
         >
-            {/* Top row */}
+            {/* Ligne supérieure : nom + badge de disponibilité */}
             <View style={styles.topRow}>
                 <Text style={styles.name}>{helper.name}</Text>
 
@@ -40,7 +40,7 @@ export default function AdminHelperCard({ helper }: AdminHelperCardProps) {
                 </View>
             </View>
 
-            {/* Infos */}
+            {/* Infos : distance max et nombre d'aides ce mois */}
             <View style={styles.infoRow}>
                 <View style={styles.infoItem}>
                     <Ionicons name="location" size={16} color="#555" />

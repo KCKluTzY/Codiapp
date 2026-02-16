@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { UserStatus } from "@/types/User";
 
 export default function UserStatusBadge({ status }: { status: UserStatus }) {
+    // Map simple status -> affichage (label + couleur)
     const config = {
         active: { label: "Actif", color: "#22c55e" },
         suspended: { label: "Suspendu", color: "#ef4444" },

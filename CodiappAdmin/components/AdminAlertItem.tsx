@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function AdminAlertItem({ text }: { text: string }) {
     return (
         <View style={styles.row}>
+            {/* Ligne d'alerte simple : icône rouge + texte */}
             <Ionicons name="alert-circle" size={20} color="#ff5252" />
             <Text style={styles.text}>{text}</Text>
         </View>

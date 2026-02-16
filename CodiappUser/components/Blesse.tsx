@@ -4,6 +4,7 @@ import { useRouter } from "expo-router"
 export default function Blesse() {
     const router = useRouter();
     return (
+        // Option 'Blessé' : redirige vers l'appel d'urgence
         <Pressable onPress={() => router.push("/AppelUrgence")}>
             <View style={styles.BlesseCard} >
                 <Image source={require("../assets/images/blesse.png")} style={styles.logo} />

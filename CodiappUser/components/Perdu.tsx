@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 export default function Perdu() {
     const router = useRouter();
     return (
+        // Option 'Perdu' : ouverture d'une discussion pour demander aide
         <Pressable onPress={() => router.push("/ChatScreen")}>
             <View style={styles.perduCard}>
                 <Image source={require("../assets/images/perdu.png")} style={styles.logo} />

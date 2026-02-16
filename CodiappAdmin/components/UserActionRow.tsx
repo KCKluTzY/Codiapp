@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function UserActionRow({ onView }: { onView: () => void }) {
     return (
         <View style={styles.row}>
+            {/* Actions rapides : 'Voir' actif, autres visuellement désactivées */}
             <Pressable onPress={onView} style={styles.action}>
                 <Ionicons name="eye" size={16} />
                 <Text>Voir</Text>

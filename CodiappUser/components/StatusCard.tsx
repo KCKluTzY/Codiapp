@@ -4,6 +4,7 @@ import { Colors } from "../constants/Colors";
 
 export default function StatusCard() {
     return (
+        // Carte de statut affichant la disponibilité des aidants
         <View style={styles.statusCard}>
             <Ionicons name="checkmark-circle-outline" size={48} color="#09a843" />
             <View style={styles.statusTextContainer}>

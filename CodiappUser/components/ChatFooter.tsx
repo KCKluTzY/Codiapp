@@ -25,7 +25,7 @@ export default function ChatFooter() {
                 />
             </Pressable>
 
-            {/* Input */}
+                    {/* Zone de saisie + boutons médias : envoi activé si `message` non vide */}
             <TextInput
                 style={styles.input}
                 placeholder="Écrire un message..."

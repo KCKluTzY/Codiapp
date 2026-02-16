@@ -19,6 +19,7 @@ export default function Statistiques() {
     // Composant Card pour chaque statistique
     const StatCard = ({ label, value, icon }: { label: string; value: number; icon?: string }) => (
         <View style={styles.card}>
+            {/* Petite carte statistique réutilisable (icone optionnelle) */}
             {icon && <Ionicons name={icon as any} size={24} color="#1FB28A" style={{ marginBottom: 8 }} />}
             <Text style={styles.cardValue}>{value}</Text>
             <Text style={styles.cardLabel}>{label}</Text>

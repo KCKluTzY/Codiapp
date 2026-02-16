@@ -10,6 +10,7 @@ interface Props {
 export default function AdminStatCard({ icon, label, value }: Props) {
     return (
         <View style={styles.card}>
+            {/* Icône + valeur + label : petit widget statistique réutilisable */}
             <Ionicons name={icon} size={28} color="#4db5ff" />
             <Text style={styles.value}>{value}</Text>
             <Text style={styles.label}>{label}</Text>

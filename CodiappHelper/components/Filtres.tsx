@@ -14,6 +14,7 @@ export default function Filtres({ active, setActive, urgentCount }: FiltresProps
 
     return (
         <View style={styles.container}>
+            {/* Onglets filtres : permet de basculer entre vues (toutes, urgent, carte) */}
             {/* Bouton Toutes */}
             <Pressable
                 style={[styles.tab, active === "all" && styles.activeAll]}

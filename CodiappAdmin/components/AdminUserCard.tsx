@@ -9,11 +9,13 @@ export default function AdminUserCard({ user }: { user: User }) {
 
     return (
         <View style={styles.card}>
+            {/* Entête : nom + badge d'état */}
             <View style={styles.header}>
                 <Text style={styles.name}>{user.name}</Text>
                 <UserStatusBadge status={user.status} />
             </View>
 
+            {/* Infos secondaires */}
             <Text style={styles.meta}>
                 {user.age} ans • {user.city}
             </Text>
@@ -22,6 +24,7 @@ export default function AdminUserCard({ user }: { user: User }) {
                 Tuteur : {user.tutor ?? "Aucun"}
             </Text>
 
+            {/* Actions : prop `onView` ouvre le détail de l'utilisateur */}
             <UserActionRow onView={() => router.push(`/(admin)/users/${user.id}`)} />
         </View>
     );

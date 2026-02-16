@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AdminDashboard() {
+    // Hook d'expo-router utilisé pour la navigation (router.push(...))
     const router = useRouter();
 
     return (
@@ -12,8 +13,9 @@ export default function AdminDashboard() {
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Dashboard Admin</Text>
 
-                {/* Stats */}
+                {/* Statistiques : composants réutilisables `AdminStatCard` */}
                 <View style={styles.statsRow}>
+                    {/* Valeurs fournies en dur ici */}
                     <AdminStatCard icon="people" label="Aidés actifs" value="128" />
                     <AdminStatCard icon="medkit" label="Aidants actifs" value="42" />
                 </View>
@@ -23,18 +25,17 @@ export default function AdminDashboard() {
                     <AdminStatCard icon="warning" label="Sans tuteur" value="7" />
                 </View>
 
-                {/* Alertes */}
+                {/* Alertes : éléments informatifs via `AdminAlertItem` */}
                 <Text style={styles.section}>Alertes</Text>
                 <AdminAlertItem text="7 aidés sans tuteur assigné" />
                 <AdminAlertItem text="3 aidants inactifs depuis 30 jours" />
 
-                {/* Navigation */}
+                {/* Section gestion : `Pressable` déclenche la navigation */}
                 <Text style={styles.section}>Gestion</Text>
 
                 <Pressable
                     style={styles.link}
                     onPress={() => router.push("/(admin)/users")}
-
                 >
                     <Text>👵 Gérer les aidés</Text>
                 </Pressable>
@@ -42,7 +43,6 @@ export default function AdminDashboard() {
                 <Pressable
                     style={styles.link}
                     onPress={() => router.push("/(admin)/helpers")}
-
                 >
                     <Text>🧑‍⚕️ Gérer les aidants</Text>
                 </Pressable>

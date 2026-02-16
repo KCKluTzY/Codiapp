@@ -5,6 +5,7 @@ import { useRouter } from "expo-router"
 export default function Derange() {
     const router = useRouter();
     return (
+        // Option 'Dérangé' : initie un appel à un aidant (mock)
         <Pressable onPress={() => router.push("/AppelAidant")}>
             <View style={styles.DerangeCard} >
                 <Image source={require("../assets/images/derange.png")} style={styles.logo} />

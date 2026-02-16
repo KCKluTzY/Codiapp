@@ -4,6 +4,7 @@ import InfoRow from "./InfoRow";
 export default function UserInfoCard({ userId }: { userId?: string }) {
     return (
         <View style={styles.card}>
+            {/* Carte d'informations basique pour l'utilisateur (exemples statiques) */}
             <Text style={styles.name}>Utilisateur #{userId}</Text>
             <Text style={styles.role}>Aidé</Text>
 

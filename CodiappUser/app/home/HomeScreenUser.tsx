@@ -12,6 +12,7 @@ export default function HomeScreenUser() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={styles.container}>
+                {/* Accès rapide paramètres + logo + sections principales */}
                 <Pressable onPress={() => router.push("/Parametres")}>
                     <Image
                         source={require("../../assets/images/parametre.png")}
@@ -25,6 +26,7 @@ export default function HomeScreenUser() {
 
                 <Text style={styles.title}>Codi App</Text>
 
+                {/* Statut + bouton d'urgence + trajet du jour */}
                 <StatusCard />
                 <EmergencyButton />
                 <DailyRoad />

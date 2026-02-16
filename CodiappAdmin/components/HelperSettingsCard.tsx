@@ -26,6 +26,7 @@ export default function HelperSettingsCard() {
                     onValueChange={(val) => setDistance(val)}
                     step={1}
                 />
+                {/* Affiche la valeur sélectionnée du slider */}
                 <Text style={styles.distance}>{distance} km</Text>
             </View>
         </View>

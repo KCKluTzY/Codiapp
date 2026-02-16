@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 export default function Autre() {
     const router = useRouter();
     return (
+        // Option "Autre" : carte tappable redirigeant vers le chat
         <Pressable onPress={() => router.push("/ChatScreen")}>
             <View style={styles.AutreCard} >
                 <Image source={require("../assets/images/Autre.png")} style={styles.logo} />

@@ -9,6 +9,7 @@ interface CameraCardProps {
 export default function CameraCard({ icon }: CameraCardProps) {
     const router = useRouter();
     return (
+        // Petite carte menant à l'interface caméra
         <Pressable onPress={() => router.push("/CameraInterface")} style={styles.card}>
             <View>
                 <Ionicons name={icon} size={28} color="white" />

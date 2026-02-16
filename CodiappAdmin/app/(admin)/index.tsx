@@ -4,6 +4,7 @@ import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-nativ
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Authentification() {
+    // Hook de navigation imperatif fourni par expo-router
     const router = useRouter();
 
     return (
@@ -14,6 +15,7 @@ export default function Authentification() {
 
             <View style={styles.content}>
                 <View style={styles.card}>
+                    {/* Image chargée via require depuis les assets locaux */}
                     <Image
                         source={require("@/assets/images/authentification.png")}
                         style={styles.logo}
@@ -28,6 +30,7 @@ export default function Authentification() {
 
                 <TextInput
                     placeholder="Email"
+                    // utilise la couleur définie dans `styles.cardSubTitle`
                     placeholderTextColor={styles.cardSubTitle.color}
                     keyboardType="email-address"
                     style={styles.input}
@@ -36,11 +39,16 @@ export default function Authentification() {
                 <TextInput
                     placeholder="Mot de passe"
                     placeholderTextColor={styles.cardSubTitle.color}
+                    // champ masqué pour le mot de passe
                     secureTextEntry
                     style={styles.input}
                 />
 
-                <Pressable style={styles.button} onPress={() => router.push("/Dashboard")}>
+                <Pressable
+                    style={styles.button}
+                    // navigation vers la route "/Dashboard"
+                    onPress={() => router.push("/Dashboard")}
+                >
                     <Text style={styles.cardTitle}>Se connecter</Text>
                 </Pressable>
             </View>
@@ -51,7 +59,7 @@ export default function Authentification() {
 const styles = StyleSheet.create({
     safe: {
         flex: 1,
-        backgroundColor: Colors.background,
+        backgroundColor: Colors.background, // thème centralisé via `Colors`
     },
     header: {
         paddingHorizontal: 16,

@@ -1,13 +1,14 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { Colors } from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import StatsRow from "./IconeRow";
+import IconeRow from "./IconeRow";
 import { useRouter } from "expo-router";
 
 export default function HeaderChat() {
     const router = useRouter();
     return (
         <View style={styles.container}>
+            {/* Header chat : back + titre + rangée d'icônes */}
             <View style={styles.topRow}>
                 <Pressable onPress={() => router.push("/HelpScreenUser")} hitSlop={12}>
                     <Ionicons name="arrow-back" size={28} color="white" />
@@ -15,7 +16,7 @@ export default function HeaderChat() {
                 <Text style={styles.demandeText}>Aide en cours</Text>
                 <View style={{ width: 28 }} />
             </View>
-            <StatsRow />
+            <IconeRow />
         </View>
     );
 }

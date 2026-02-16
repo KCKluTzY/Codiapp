@@ -7,6 +7,7 @@ export default function UserActions({ userId }: { userId?: string }) {
 
     return (
         <View style={styles.container}>
+            {/* Ensemble de boutons d'action pour l'utilisateur */}
             <ActionButton icon="person-add" label="Attribuer un tuteur" />
             <ActionButton icon="map" label="Voir sur la carte" onPress={() => router.push("/MapInterface")} />
             <ActionButton

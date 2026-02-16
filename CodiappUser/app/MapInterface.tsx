@@ -8,7 +8,7 @@ export default function MapInterface() {
     return (
         <View style={styles.container}>
 
-            {/* CARTE */}
+            {/* CARTE : placeholder en attendant l'intégration d'une vraie Map (MapView) */}
             <View style={styles.mapProvider}>
                 <View style={styles.placeholderMap}>
                     <Ionicons name="map-outline" size={60} color="#ccc" />
@@ -16,7 +16,7 @@ export default function MapInterface() {
                 </View>
             </View>
 
-            {/* INTERFACE */}
+            {/* Interface flottante : contrôles superposés à la carte */}
             <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
 
                 {/* Header */}
@@ -31,7 +31,7 @@ export default function MapInterface() {
                     </View>
                 </View>
 
-                {/* Menu */}
+                {/* Menu flottant : actions rapides (localisation, chat) */}
                 <View style={styles.sideMenu}>
                     <Pressable style={[styles.actionBtn, { backgroundColor: '#3B82F6' }]}>
                         <Ionicons name="locate" size={28} color="white" />
@@ -45,7 +45,7 @@ export default function MapInterface() {
                     </Pressable>
                 </View>
 
-                {/* Footer */}
+                {/* Footer : bouton d'arrêt/fin d'intervention */}
                 <View style={styles.footer}>
                     <Pressable
                         onPress={() => router.back()}

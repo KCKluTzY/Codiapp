@@ -16,10 +16,10 @@ export default function MapInterface() {
                 </View>
             </View>
 
-            {/* INTERFACE */}
+            {/* Interface superposée sur la carte : contrôles flottants */}
             <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
 
-                {/* Header */}
+                {/* Header : bouton back + badge distance */}
                 <View style={styles.header}>
                     <Pressable onPress={() => router.back()} style={styles.backBtn}>
                         <Ionicons name="chevron-back" size={32} color="white" />

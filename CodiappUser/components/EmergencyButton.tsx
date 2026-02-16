@@ -6,6 +6,7 @@ import { Colors } from "../constants/Colors";
 export default function EmergencyButton() {
     const router = useRouter();
     return (
+        // Gros bouton d'urgence : redirige vers l'écran d'aide
         <Pressable style={styles.button} onPress={() => router.push("/HelpScreenUser")}>
             <Ionicons name="alert-circle-outline" size={96} color="white" />
             <Text style={styles.text}>J'AI BESOIN D'AIDE</Text>

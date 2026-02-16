@@ -76,7 +76,7 @@ export default function HeaderProfile() {
                 </View>
             </View>
 
-            {/* Paramètres + Logout */}
+            {/* Boutons action : paramètres et déconnexion */}
             <View style={styles.rightButtons}>
                 <Pressable
                     style={styles.iconButton}

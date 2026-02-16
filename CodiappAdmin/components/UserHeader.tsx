@@ -7,6 +7,7 @@ export default function UserHeader() {
 
     return (
         <View style={styles.header}>
+            {/* Bouton back à gauche + titre centré */}
             <Pressable onPress={() => router.back()} hitSlop={12}>
                 <Ionicons name="arrow-back" size={26} color="#111" />
             </Pressable>

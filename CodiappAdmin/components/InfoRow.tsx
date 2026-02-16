@@ -9,6 +9,7 @@ export default function InfoRow({
 }) {
     return (
         <View style={styles.row}>
+            {/* Ligne simple label/value utilisée dans plusieurs cartes */}
             <Text style={styles.label}>{label}</Text>
             <Text style={styles.value}>{value}</Text>
         </View>

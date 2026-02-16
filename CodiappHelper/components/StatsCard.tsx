@@ -8,6 +8,7 @@ interface StatsCardProps {
 export default function StatsCard({ value, label }: StatsCardProps) {
     return (
         <View style={styles.card}>
+            {/* Carte statistique simple (couleur primaire ici) */}
             <Text style={styles.value}>{value}</Text>
             <Text style={styles.label}>{label}</Text>
         </View>

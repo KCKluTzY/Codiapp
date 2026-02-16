@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 export default function Panne() {
     const router = useRouter();
     return (
+        // Option 'Panne' : signale une panne et ouvre le chat pour assistance
         <Pressable onPress={() => router.push("/ChatScreen")}>
             <View style={styles.PanneCard}>
                 <Image source={require("../assets/images/Panne.png")} style={styles.logo} />

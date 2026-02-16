@@ -12,6 +12,7 @@ export default function SettingSection({
 }: SettingSectionProps) {
     return (
         <View style={styles.container}>
+            {/* Section visuelle regroupant plusieurs SettingItem */}
             <Text style={styles.title}>{title}</Text>
             <View style={styles.content}>{children}</View>
         </View>

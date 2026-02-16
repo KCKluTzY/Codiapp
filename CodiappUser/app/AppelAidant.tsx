@@ -9,6 +9,7 @@ export default function AppelAidant() {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#000" }}>
             <View style={styles.container}>
+                {/* Écran d'appel vers l'aidant (mock) */}
                 <Text style={styles.callingText}>Appel en cours</Text>
                 <Text style={styles.number}>{NomAidant}</Text>
                 <Text style={styles.status}>Sonnerie...</Text>

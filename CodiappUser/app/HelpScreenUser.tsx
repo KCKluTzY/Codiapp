@@ -30,6 +30,7 @@ export default function HelpScreenUser() {
                 <Text style={styles.title}>Que se passe-t-il?</Text>
             </View>
             <View style={styles.content}>
+                {/* Présentation des options d'incident (composants réutilisables) */}
                 <Perdu />
                 <NoTransport />
                 <Panne />

@@ -11,6 +11,7 @@ export default function HelperHeader({ helperId }: Props) {
 
     return (
         <View style={styles.container}>
+            {/* Header stylé avec bouton back et titre centré */}
             <Pressable onPress={() => router.back()} hitSlop={12}>
                 <Ionicons name="arrow-back" size={26} color="white" />
             </Pressable>

@@ -9,6 +9,7 @@ interface TelCardProps {
 export default function TelCard({ icon }: TelCardProps) {
     const router = useRouter();
     return (
+        // Petite carte/action téléphonique — lance l'appel à un aidant
         <Pressable onPress={() => router.push("/AppelAidant")} style={styles.card}>
             <View style={styles.card}>
                 <Ionicons name={icon} size={28} color="white" />

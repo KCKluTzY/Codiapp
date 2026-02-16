@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function HelperStatsCard() {
     return (
         <View style={styles.container}>
+            {/* Section statistiques pour un aidant */}
             <Text style={styles.sectionTitle}>Statistiques</Text>
 
             <View style={styles.row}>

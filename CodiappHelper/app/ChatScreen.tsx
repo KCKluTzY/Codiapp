@@ -7,6 +7,7 @@ export default function ChatScreen() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                {/* Header + placeholder conversation (API non intégrée) */}
                 <HeaderChat />
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                     <Text style={{ color: "black", fontSize: 16, fontWeight: "600", textAlign: "center" }}>Conversation (en attente d'API)</Text>
@@ -19,6 +20,7 @@ export default function ChatScreen() {
                 justifyContent: "center",
                 alignItems: "center"
             }}>
+                {/* Footer : zone d'envoi (composant séparé) */}
                 <Footer />
             </View>
         </SafeAreaView >

@@ -25,7 +25,7 @@ export default function ChatFooter() {
                 />
             </Pressable>
 
-            {/* Input */}
+            {/* Zone de composition : input + envoi conditionnel */}
             <TextInput
                 style={styles.input}
                 placeholder="Écrire un message..."

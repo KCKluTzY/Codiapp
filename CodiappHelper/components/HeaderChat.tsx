@@ -6,6 +6,7 @@ export default function HeaderChat() {
     const router = useRouter();
     return (
         <View style={styles.container}>
+            {/* Header de chat : bouton back et titre centré */}
             <View style={styles.topRow}>
                 <Pressable onPress={() => router.push("../home/HomeScreenHelper")} hitSlop={12}>
                     <Ionicons name="arrow-back" size={28} color="white" />

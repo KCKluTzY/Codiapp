@@ -21,6 +21,7 @@ export default function SettingItem({
         <Pressable
             disabled={!isPressable}
             onPress={onPress}
+            // Comportement visuel : rendu pressé seulement si pressable
             style={({ pressed }) => [
                 styles.row,
                 pressed && isPressable && styles.pressed,
@@ -31,6 +32,7 @@ export default function SettingItem({
                 <Text style={styles.label}>{label}</Text>
             </View>
 
+            {/* Right : soit un composant custom, soit chevron si pressable */}
             {right ? (
                 right
             ) : isPressable ? (
