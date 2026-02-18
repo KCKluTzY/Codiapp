@@ -55,7 +55,7 @@ export default function HeaderProfile() {
 
     const initial = user?.username?.charAt(0).toUpperCase() ?? "?";
     const roleLabel =
-        user?.role === "HELPER" ? "Aidant(e)" : "Aidé";
+        user?.role === "HELPER" ? "Aidant(e)" : "Aidant(e)"; // Affichage plus lisible du rôle
 
     return (
         <View style={styles.container}>
