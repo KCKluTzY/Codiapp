@@ -4,7 +4,6 @@ import { Colors } from "../constants/Colors";
 
 export default function DailyRoad() {
     return (
-        {/* Carte synthétique du trajet quotidien + alerte de perturbation */}
         <View style={styles.dailyroadcard}>
             <View style={styles.topRow}>
                 <Ionicons name="location-outline" size={48} color="#4b2dde" />
