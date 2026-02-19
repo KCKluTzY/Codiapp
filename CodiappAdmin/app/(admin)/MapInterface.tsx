@@ -1,38 +1,63 @@
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function MapInterface() {
-    // Hook de navigation pour revenir en arrière avec `router.back()`
     const router = useRouter();
 
     return (
         <View style={styles.container}>
 
-            {/* CARTE */}
+            {/* CARTE : placeholder en attendant l'intégration d'une vraie Map (MapView) */}
             <View style={styles.mapProvider}>
-                {/* Placeholder visuel en attendant l'intégration d'une vraie carte (MapView, etc.) */}
                 <View style={styles.placeholderMap}>
-                    <Ionicons name="map-outline" size={60} color="#ccc" />
-                    <Text style={{ color: '#aaa', marginTop: 10 }}>Carte en attente d'API</Text>
+                    <Image
+                        source={require('../../assets/images/map.png')}
+                        style={styles.mapImage}
+                        resizeMode="contain"
+
+                    />
+
                 </View>
             </View>
 
-            {/* INTERFACE superposée contenir l'api map */}
+            {/* Interface flottante : contrôles superposés à la carte */}
             <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
 
-                {/* Header contenant le bouton 'back' */}
+                {/* Header */}
                 <View style={styles.header}>
                     <Pressable onPress={() => router.back()} style={styles.backBtn}>
                         <Ionicons name="chevron-back" size={32} color="white" />
                     </Pressable>
+
+                    <View style={styles.distanceBadge}>
+                        <Text style={styles.distanceLabel}>DISTANCE</Text>
+                        <Text style={styles.distanceValue}>2.0 km</Text>
+                    </View>
                 </View>
 
-                {/* Menu latéral flottant */}
+                {/* Menu flottant : actions rapides (localisation, chat) */}
                 <View style={styles.sideMenu}>
-                    {/* Bouton d'action de la localisation */}
                     <Pressable style={[styles.actionBtn, { backgroundColor: '#3B82F6' }]}>
                         <Ionicons name="locate" size={28} color="white" />
+                    </Pressable>
+
+                    <Pressable
+                        onPress={() => router.back()}
+                        style={[styles.actionBtn, { backgroundColor: '#F97316' }]}
+                    >
+                        <Ionicons name="chatbubble-ellipses" size={28} color="white" />
+                    </Pressable>
+                </View>
+
+                {/* Footer : bouton d'arrêt/fin d'intervention */}
+                <View style={styles.footer}>
+                    <Pressable
+                        onPress={() => router.back()}
+                        style={styles.stopBtn}
+                    >
+                        <Ionicons name="stop-circle" size={24} color="white" />
+                        <Text style={styles.stopText}>TERMINER</Text>
                     </Pressable>
                 </View>
 
@@ -46,13 +71,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     mapProvider: {
-        ...StyleSheet.absoluteFillObject, // remplit tout l'espace parent 
+        ...StyleSheet.absoluteFillObject,
     },
     placeholderMap: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#E5E7EB',
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#E5E7EB",
+    },
+    mapImage: {
+        width: "100%",
+        height: "100%",
     },
     dot: {
         position: 'absolute',
@@ -98,7 +127,7 @@ const styles = StyleSheet.create({
     sideMenu: {
         position: 'absolute',
         right: 20,
-        top: '30%',
+        top: '45%',
         gap: 15,
     },
     actionBtn: {

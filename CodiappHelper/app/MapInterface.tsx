@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 
 export default function MapInterface() {
     const router = useRouter();
@@ -11,8 +11,7 @@ export default function MapInterface() {
             {/* CARTE */}
             <View style={styles.mapProvider}>
                 <View style={styles.placeholderMap}>
-                    <Ionicons name="map-outline" size={60} color="#ccc" />
-                    <Text style={{ color: '#aaa', marginTop: 10 }}>Carte en attente d'API</Text>
+                    <Image source={require('../assets/images/map.png')} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
                 </View>
             </View>
 
@@ -27,7 +26,7 @@ export default function MapInterface() {
 
                     <View style={styles.distanceBadge}>
                         <Text style={styles.distanceLabel}>DISTANCE</Text>
-                        <Text style={styles.distanceValue}>0.0 km</Text>
+                        <Text style={styles.distanceValue}>3.0 km</Text>
                     </View>
                 </View>
 
@@ -103,8 +102,8 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     actionBtn: {
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -112,6 +111,7 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOpacity: 0.3,
         shadowRadius: 5,
+        marginTop: 50
     },
     footer: {
         position: 'absolute',

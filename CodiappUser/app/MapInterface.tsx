@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
@@ -11,8 +11,13 @@ export default function MapInterface() {
             {/* CARTE : placeholder en attendant l'intégration d'une vraie Map (MapView) */}
             <View style={styles.mapProvider}>
                 <View style={styles.placeholderMap}>
-                    <Ionicons name="map-outline" size={60} color="#ccc" />
-                    <Text style={{ color: '#aaa', marginTop: 10 }}>Carte en attente d'API</Text>
+                    <Image
+                        source={require('../assets/images/map.png')}
+                        style={styles.mapImage}
+                        resizeMode="contain"
+
+                    />
+
                 </View>
             </View>
 
@@ -27,7 +32,7 @@ export default function MapInterface() {
 
                     <View style={styles.distanceBadge}>
                         <Text style={styles.distanceLabel}>DISTANCE</Text>
-                        <Text style={styles.distanceValue}>0.0 km</Text>
+                        <Text style={styles.distanceValue}>2.0 km</Text>
                     </View>
                 </View>
 
@@ -70,9 +75,13 @@ const styles = StyleSheet.create({
     },
     placeholderMap: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#E5E7EB',
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#E5E7EB",
+    },
+    mapImage: {
+        width: "100%",
+        height: "100%",
     },
     dot: {
         position: 'absolute',
@@ -118,7 +127,7 @@ const styles = StyleSheet.create({
     sideMenu: {
         position: 'absolute',
         right: 20,
-        top: '30%',
+        top: '40%',
         gap: 15,
     },
     actionBtn: {
